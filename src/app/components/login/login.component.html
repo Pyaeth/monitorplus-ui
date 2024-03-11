@@ -1,0 +1,24 @@
+<h2>Login</h2>
+<form [formGroup]="loginForm">
+    <div class="row col-12">
+        <span class="p-float-label">
+            <input pInputText id="username" formControlName="username" />
+            <label for="username">Username</label>
+        </span>
+    </div>
+    <div class="row col-12">
+        <span class="p-float-label">
+            <p-password formControlName="password" id="loginPassword" [feedback]="false"></p-password>
+            <label for="loginPassword">Password</label>
+        </span>
+    </div>
+    <div class="row col-12">
+        <p-button type="submit" pRipple label="Login" icon="pi pi-check" iconPos="right" [raised]="true"
+            [loading]="loading" loadingIcon="pi pi-bell" (onClick)="onLogin()" [disabled]="loginForm.isReadyForSubmit()"></p-button>
+    </div>
+    <p-divider></p-divider>
+    <div class="row">
+        <p>Forgot your password? Click <a [routerLink]="'/reset'">here</a> to reset.</p>
+    </div>
+
+</form>
