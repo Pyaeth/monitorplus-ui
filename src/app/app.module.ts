@@ -22,9 +22,13 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { RippleModule } from 'primeng/ripple';
 import { AppRoutingModule } from './app-routing.module';
 import { appRoutes } from './app.routes';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
-    declarations: [AppComponent, LoginComponent, NewUserComponent, ResetPasswordComponent, PageNotFoundComponent, UserComponent],
+    declarations: [AppComponent, LoginComponent, NewUserComponent, ResetPasswordComponent, PageNotFoundComponent, UserComponent,
+    UserDetailsComponent, DashboardComponent],
     imports: [RouterOutlet,
         BrowserModule,
         BrowserAnimationsModule,
@@ -36,6 +40,7 @@ import { appRoutes } from './app.routes';
         ),
         FormsModule,
         SplitterModule,
+        DropdownModule,
         RouterModule, CardModule, HttpClientModule, DividerModule, PasswordModule, ReactiveFormsModule, InputTextModule, ButtonModule, CommonModule,
         RippleModule],
     providers: [HttpService, ConfirmationService],

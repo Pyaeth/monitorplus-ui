@@ -5,22 +5,36 @@ import { Injectable } from "@angular/core";
     providedIn: 'root'
 })
 export class HttpService {
+    private BACK_URL = 'http://localhost:8081/api';
+    private requestOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+      };
     constructor(private readonly httpClient: HttpClient) {
-
     }
 
     requestLogin(user: string, password: string) {
-        const headersToSend = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Access-Control-Allow-Headers': 'Content-Type',
-            'uid': user,
-            'password': password
+        return this.httpClient.get(`${this.BACK_URL}/user-login`, this.requestOptions);
+    }
+
+    registerNewUser(email: string, password: string) {
+        const body = {
+            email: email,
+            password: password,
+            firstName: '',
+            lastName: '',
+            userId: '',
+            defaultCurrency: '',
+            isActive: true,
+            lastConnectionDate: Date.now(),
+            lastConnectionAddress: ''
         }
 
-        const requestOptions = {
-            headers: new HttpHeaders(headersToSend),
-        };
-        return this.httpClient.get('/login', requestOptions);
+        return this.httpClient.post(`${this.BACK_URL}/register-user`, body, this.requestOptions);
+    }
+
+    getAvailableCurrencies() {
+        return this.httpClient.get(`${this.BACK_URL}/currencies`, this.requestOptions);
     }
 }
