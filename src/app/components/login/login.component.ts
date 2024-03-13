@@ -1,7 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpService } from '../../services/http.service';
 import { CustomFormGroup } from 'src/app/utility/custom-form-group';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Message, MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,16 +11,23 @@ import { CustomFormGroup } from 'src/app/utility/custom-form-group';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  @Output()
+  onSuccessLogon!: EventEmitter<any>;
+  @Output()
+  onFailedLogon!: EventEmitter<any>;
+  
   isPasswordResetRequested = false;
   loading = false;
   loginByUsername = false;
 
   loginForm: CustomFormGroup;
 
-  constructor(private readonly httpService: HttpService) {
+  constructor(private readonly authenticationService: AuthenticationService,
+    private readonly messageService: MessageService,
+    private readonly router: Router) {
     this.loginForm = new CustomFormGroup({
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(16)])
+      username: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(32)])
     });
   }
 
@@ -32,16 +41,21 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onLogin() {
     this.loading = true;
-    this.httpService.requestLogin(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value)
+    this.authenticationService.getValidLogin(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value)
     .subscribe({
-      next: (data) => this.loading = false,
+      next: (data) => this.onValidLogin(data),
         error: (err) => this.handleError(err),
         complete: () => {}
       });
   }
 
+  private onValidLogin(data: any) {
+    this.loading = false;
+    this.onSuccessLogon.emit(data);
+  }
+
   private handleError(error: any) {
-    console.log(error);
+    this.onFailedLogon.emit(error);
   }
 
   isReadyForSubmit() {

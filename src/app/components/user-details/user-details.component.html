@@ -1,0 +1,28 @@
+<p-fieldset>
+    <ng-template pTemplate="header">
+        <div class="flex align-items-center gap-2 px-2">
+            <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+            <span class="font-bold">My Profile</span>
+        </div>
+        <div class="">
+            <form [formGroup]="form">
+                <input type="text" pInputText formControlName="firstName" id="firstName" />
+                <input type="text" pInputText formControlName="lastName" id="lastName" />
+                <input type="email" pInputText formControlName="email" id="email" />
+                <p-dropdown formControlName="currency" [options]="currencies" optionLabel="name" [filter]="true"
+                    filterBy="name" [showClear]="true" placeholder="Select a Currency Code">
+                    <ng-template pTemplate="selectedItem" let-selectedOption>
+                        <div class="flex align-items-center gap-2">
+                            {{ selectedOption.name }}
+                        </div>
+                    </ng-template>
+                    <ng-template let-country pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            {{ country.name }}
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </form>
+        </div>
+    </ng-template>
+</p-fieldset>

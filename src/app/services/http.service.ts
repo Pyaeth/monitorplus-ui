@@ -1,26 +1,34 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { map } from "rxjs";
+import { AmountRepresentation } from "../models/amount-representation.model";
+
+export const TOKEN = 'token';
+export const AUTHENTICATED_USER = 'authenticatedUser';
 
 @Injectable({
     providedIn: 'root'
 })
 export class HttpService {
-    constructor(private readonly httpClient: HttpClient) {
 
+    private BACK_URL = 'http://localhost:8080/api';
+    private requestOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+        }),
+    };
+    constructor(private readonly httpClient: HttpClient) {
     }
 
-    requestLogin(user: string, password: string) {
-        const headersToSend = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Access-Control-Allow-Headers': 'Content-Type',
-            'uid': user,
-            'password': password
-        }
+    getCurrentMonthlySummary(index: number) {
+        return this.httpClient.get(`${this.BACK_URL}/dashboard/requestMonth/${index}`, this.requestOptions);
+    }
 
-        const requestOptions = {
-            headers: new HttpHeaders(headersToSend),
-        };
-        return this.httpClient.get('/login', requestOptions);
+    addRecordToMonth(amount: AmountRepresentation) {
+        return this.httpClient.post<any>(`${this.BACK_URL}/dashboard/createAccount`, amount, this.requestOptions);
+    }
+
+    getAvailableCurrencies() {
+        return this.httpClient.get(`${this.BACK_URL}/currencies`, this.requestOptions);
     }
 }

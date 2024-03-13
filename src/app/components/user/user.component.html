@@ -3,14 +3,14 @@
         <p-card header="Welcome!">
             <div class="flex flex-column md:flex-row">
                 <div class="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
-                    <app-login></app-login>
+                    <app-login (onSuccessLogon)="handleSuccessfulLogin($event)" (onFailedLogon)="handleErrors($event)"></app-login>
                 </div>
                 <div class="w-full md:w-2">
                     <p-divider layout="vertical" styleClass="hidden md:flex"><b>OR</b></p-divider>
                     <p-divider layout="horizontal" styleClass="flex md:hidden" [align]="'center'"><b>OR</b></p-divider>
                 </div>
                 <div class="w-full md:w-5 flex align-items-center justify-content-center py-5">
-                    <app-new-user></app-new-user>
+                    <app-new-user (onSuccessLogon)="handleSuccessfulLogin($event)" (onFailedLogon)="handleErrors($event)"></app-new-user>
                 </div>
             </div>
         </p-card>

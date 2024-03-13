@@ -1,0 +1,5 @@
+<p-tabView [(activeIndex)]="activeIndex" [scrollable]="true">
+    <p-tabPanel *ngFor="let tab of scrollableTabs" header="{{ tab | date: 'MMMM' }}">
+        <app-month-summary [index]="activeIndex"></app-month-summary>
+    </p-tabPanel>
+</p-tabView>

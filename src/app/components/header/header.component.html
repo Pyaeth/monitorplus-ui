@@ -1,0 +1,29 @@
+<div class="flex flex-wrap gap-3 align-items-center justify-content-end">
+    <div class="relative bg-primary-200 w-9rem h-9rem mx-3 my-3 md:my-0 border-round-bottom">
+        <div class="absolute top-0 right-0 bg-primary font-bold flex align-items-center justify-content-center w-4rem h-4rem border-round">
+
+
+            <p-menubar [model]="items">
+                <ng-template pTemplate="start">
+                    <div class="col-3">
+                        <ng-container *ngIf="user.profilePicture; else displayUserIcon">
+                            <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+                                styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+                        </ng-container>
+                        <ng-template #displayUserIcon>
+                            <p-avatar icon="pi pi-user" styleClass="mr-2" size="large"
+                                [style]="{'background-color':'#2196F3', 'color': '#ffffff'}" shape="circle"></p-avatar>
+                        </ng-template>
+                    </div>
+                    <div class="col-7">
+                        <p>{{ user.username }}</p>
+                    </div>
+                    <div class="col-2"></div>
+                </ng-template>
+                <ng-template pTemplate="end">
+                </ng-template>
+            </p-menubar>
+
+        </div>
+    </div>
+</div>

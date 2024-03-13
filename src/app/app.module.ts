@@ -22,9 +22,36 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { RippleModule } from 'primeng/ripple';
 import { AppRoutingModule } from './app-routing.module';
 import { appRoutes } from './app.routes';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { MessagesModule } from 'primeng/messages';
+import { PaginatorModule } from 'primeng/paginator';
+import { AuthenticationService } from './services/authentication.service';
+import { DockModule } from 'primeng/dock';
+import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
+import { HeaderComponent } from './components/header/header.component';
+import { AnimateOnScrollModule } from 'primeng/animateonscroll';
+import { MenubarModule } from 'primeng/menubar';
+import { MonthSummaryComponent } from './components/month-summary/month-summary.component';
+import { TableModule } from 'primeng/table';
+import { DaySummaryComponent } from './components/month-summary/day-summary/day-summary.component';
+
 
 @NgModule({
-    declarations: [AppComponent, LoginComponent, NewUserComponent, ResetPasswordComponent, PageNotFoundComponent, UserComponent],
+    declarations: [AppComponent,
+        UserComponent, LoginComponent, NewUserComponent,
+        ResetPasswordComponent,
+        PageNotFoundComponent,
+        UserDetailsComponent,
+        DashboardComponent,
+        WelcomePageComponent,
+        HeaderComponent,
+        MonthSummaryComponent,
+        DaySummaryComponent
+    ],
     imports: [RouterOutlet,
         BrowserModule,
         BrowserAnimationsModule,
@@ -32,13 +59,30 @@ import { appRoutes } from './app.routes';
         RouterModule.forRoot(
             appRoutes,
             { onSameUrlNavigation: 'reload',
-            useHash: false } // <-- debugging purposes only
+            useHash: false }
         ),
         FormsModule,
         SplitterModule,
-        RouterModule, CardModule, HttpClientModule, DividerModule, PasswordModule, ReactiveFormsModule, InputTextModule, ButtonModule, CommonModule,
-        RippleModule],
-    providers: [HttpService, ConfirmationService],
+        DropdownModule,
+        MessagesModule,
+        RouterModule,
+        CardModule,
+        HttpClientModule,
+        DividerModule,
+        PasswordModule,
+        ReactiveFormsModule,
+        InputTextModule,
+        ButtonModule,
+        CommonModule,
+        RippleModule,
+        DockModule,
+        AvatarModule,
+        AvatarGroupModule,
+        AnimateOnScrollModule,
+        MenubarModule,
+        TableModule
+    ],
+    providers: [HttpService, ConfirmationService, AuthenticationService],
     schemas: [NO_ERRORS_SCHEMA],
     bootstrap: [AppComponent]
 })
