@@ -2,31 +2,30 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { LoginComponent } from './components/login/login.component';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
+import { NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpService } from './services/http.service';
+import { AuthGuardService } from './services/auth-guard.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { CardModule } from 'primeng/card';
 import { SplitterModule } from 'primeng/splitter';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { NewUserComponent } from './components/new-user/new-user.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UserComponent } from './components/user/user.component';
 import { CommonModule } from '@angular/common';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { RippleModule } from 'primeng/ripple';
-import { AppRoutingModule } from './app-routing.module';
-import { appRoutes } from './app.routes';
+import { AppRoutingModule, appRoutes } from './app-routing.module';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { MessagesModule } from 'primeng/messages';
-import { PaginatorModule } from 'primeng/paginator';
 import { AuthenticationService } from './services/authentication.service';
 import { DockModule } from 'primeng/dock';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
@@ -82,7 +81,7 @@ import { DaySummaryComponent } from './components/month-summary/day-summary/day-
         MenubarModule,
         TableModule
     ],
-    providers: [HttpService, ConfirmationService, AuthenticationService],
+    providers: [HttpService, ConfirmationService, AuthenticationService, AuthGuardService, MessageService],
     schemas: [NO_ERRORS_SCHEMA],
     bootstrap: [AppComponent]
 })

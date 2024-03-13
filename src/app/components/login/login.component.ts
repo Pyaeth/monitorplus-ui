@@ -12,9 +12,9 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   @Output()
-  onSuccessLogon!: EventEmitter<any>;
+  onSuccessLogon: EventEmitter<any> = new EventEmitter();
   @Output()
-  onFailedLogon!: EventEmitter<any>;
+  onFailedLogon: EventEmitter<any> = new EventEmitter();
   
   isPasswordResetRequested = false;
   loading = false;

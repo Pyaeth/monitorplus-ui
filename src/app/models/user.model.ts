@@ -1,11 +1,11 @@
 export class User { 
-    private _username: string;
-    private _email: string;
-    private _firstName: string;
-    private _lastName: string;
-    private _lastConnectionDate: Date;
-    private _lastConnectionAddress: string;
-    private _defaultCurrency: string;
+    private _username: string = '';
+    private _email: string = '';
+    private _firstName: string = '';
+    private _lastName: string = '';
+    private _lastConnectionDate: Date = new Date();
+    private _lastConnectionAddress: string = '';
+    private _defaultCurrency: string = '';
     private _profilePicture: any;
 
     //getters

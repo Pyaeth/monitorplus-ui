@@ -29,7 +29,7 @@ export class MonthSummaryComponent implements OnInit {
       }
     );
   }
-  map(data): void {
+  map(data: any): void {
     this.data = data;
   }
 

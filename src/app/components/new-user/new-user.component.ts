@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { HttpService } from 'src/app/services/http.service';
 import { CustomFormGroup } from 'src/app/utility/custom-form-group';
 
 @Component({
@@ -13,9 +11,9 @@ import { CustomFormGroup } from 'src/app/utility/custom-form-group';
 })
 export class NewUserComponent {
   @Output()
-  onSuccessLogon!: EventEmitter<any>;
+  onSuccessLogon: EventEmitter<any> = new EventEmitter();
   @Output()
-  onFailedLogon!: EventEmitter<any>;
+  onFailedLogon: EventEmitter<any> = new EventEmitter();
 
   form: CustomFormGroup;
   loading = false;

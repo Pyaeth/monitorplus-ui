@@ -1,11 +1,17 @@
 import { Injectable, inject } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from "@angular/router";
 import { UserToken } from "../models/user-token.model";
 
-@Injectable()
-class PermissionsService {
+@Injectable({
+    providedIn: 'root',
+  })
+export class AuthGuardService {
+
+    constructor(private readonly router: Router) {}
+
     canActivate(currentUser: UserToken): boolean {
         if (!currentUser || !currentUser.jwtToken) {
+            this.router.navigateByUrl("/login");
             return false;
         }
         return true;
@@ -19,5 +25,5 @@ export const profileGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
     if (sessionStorageUser) {
         currentUser = new UserToken(sessionStorageUser, sessionStorage.getItem('authenticatedUserToken') as string);
     }
-    return inject(PermissionsService).canActivate(currentUser);
+    return inject(AuthGuardService).canActivate(currentUser);
 };

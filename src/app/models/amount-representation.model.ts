@@ -1,9 +1,7 @@
-import { UUID } from "crypto";
-
 export class AmountRepresentation {
-    inputDate: Date;
-    amount: number;
-    sign: string;
-    userId: UUID;
-    currency: string;
+    inputDate: Date = new Date();
+    amount: number = 0;
+    sign: string = '';
+    userId: string = '';
+    currency: string = 'EUR';
 }
